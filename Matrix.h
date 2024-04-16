@@ -11,7 +11,7 @@ private:
 
 public:
     Matrix(int rows, int cols);
-
+    Matrix(); // Default constructor declaration
     int getRows() const;
     int getCols() const;
 

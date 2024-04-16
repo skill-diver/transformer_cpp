@@ -9,11 +9,11 @@ TARGET = transformer
 
 all: $(TARGET)
 
-$(TARGET): $(OBJS)
-    $(CXX) $(CXXFLAGS) $^ -o $@
+main: main.cpp Matrix.cpp MultiHeadAttention.cpp FeedForward.cpp
+	$(CXX) -std=c++11 -Wall main.cpp Matrix.cpp MultiHeadAttention.cpp FeedForward.cpp -o main
 
 %.o: %.cpp
-    $(CXX) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-    rm -f $(OBJS) $(TARGET)
+	rm -f $(OBJS) $(TARGET)
