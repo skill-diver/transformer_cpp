@@ -4,17 +4,16 @@
 #include "FeedForward.h"
 
 int main() {
-    int batchSize = 2;
     int seqLen = 3;
     int inputDim = 4;
     int numHeads = 2;
     int hiddenDim = 8;
     int outputDim = 4;
 
-    Matrix input(batchSize, seqLen * inputDim);
+    Matrix input(seqLen, inputDim);
     // Initialize the input matrix with appropriate values
-    for (int i = 0; i < batchSize; ++i) {
-        for (int j = 0; j < seqLen * inputDim; ++j) {
+    for (int i = 0; i < seqLen; ++i) {
+        for (int j = 0; j < inputDim; ++j) {
             input(i, j) = (i + j) / 10.0;
         }
     }
