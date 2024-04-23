@@ -16,6 +16,7 @@ private:
 public:
     MultiHeadAttention(int numHeads, int inputDim, int outputDim);
     Matrix forward(const Matrix& input);
+    int getNumParameters() const;
 
 private:
     Matrix softmax(const Matrix& input);

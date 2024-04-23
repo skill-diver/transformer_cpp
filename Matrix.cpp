@@ -17,6 +17,10 @@ int Matrix::getCols() const {
     return cols;
 }
 
+std::pair<int, int> Matrix::getShape() const {
+    return std::make_pair(rows, cols);
+}
+
 double& Matrix::operator()(int i, int j) {
     return data[i][j];
 }

@@ -20,3 +20,10 @@ Matrix FeedForward::relu(const Matrix& input) {
     }
     return output;
 }
+
+int FeedForward::getNumParameters() const {
+    return w1.getRows() * w1.getCols() +
+           b1.getRows() * b1.getCols() +
+           w2.getRows() * w2.getCols() +
+           b2.getRows() * b2.getCols();
+}

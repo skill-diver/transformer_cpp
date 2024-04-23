@@ -14,7 +14,7 @@ public:
     Matrix(); // Default constructor declaration
     int getRows() const;
     int getCols() const;
-
+    std::pair<int, int> getShape() const;
     double& operator()(int i, int j);
     const double& operator()(int i, int j) const;
 

@@ -1,5 +1,6 @@
 #include <vector>
 #include <cmath>
+#include <iostream>
 #include "Matrix.h"
 #include "MultiHeadAttention.h"
 
@@ -13,7 +14,9 @@ MultiHeadAttention::MultiHeadAttention(int numHeads, int inputDim, int outputDim
 Matrix MultiHeadAttention::forward(const Matrix& input) {
     int batchSize = input.getRows();
     int seqLen = input.getCols() / headDim;
-
+    if (input.getCols() % headDim != 0) {
+        throw std::invalid_argument("Input dimensions must be divisible by head dimension.");
+    }
     std::vector<Matrix> queries(numHeads);
     std::vector<Matrix> keys(numHeads);
     std::vector<Matrix> values(numHeads);
@@ -60,4 +63,11 @@ Matrix MultiHeadAttention::softmax(const Matrix& input) {
         }
     }
     return exp;
+}
+
+int MultiHeadAttention::getNumParameters() const {
+    return numHeads * (wq[0].getRows() * wq[0].getCols() +
+                        wk[0].getRows() * wk[0].getCols() +
+                        wv[0].getRows() * wv[0].getCols()) +
+           wo.getRows() * wo.getCols();
 }
