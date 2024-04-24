@@ -98,3 +98,22 @@ void Matrix::print() const {
         std::cout << std::endl;
     }
 }
+
+// Quantize the matrix to 8-bit integer representation.
+void quantize(Matrix<float>& mat, Matrix<int8_t>& quantized_mat, Matrix<float>& scale) {
+    float max_val = *std::max_element(mat.begin(), mat.end(), [](float a, float b) {
+        return std::abs(a) < std::abs(b);
+    });
+    scale = 127.0f / max_val;
+
+    for (size_t i = 0; i < mat.size(); ++i) {
+        quantized_mat[i] = static_cast<int8_t>(std::round(mat[i] * scale));
+    }
+}
+
+// Dequantize the matrix from 8-bit integer representation back to floating point.
+void dequantize(Matrix<int32_t>& quantized_mat, Matrix<float>& dequantized_mat, Matrix<float>& scale) {
+    for (size_t i = 0; i < quantized_mat.size(); ++i) {
+        dequantized_mat[i] = quantized_mat[i] / scale;
+    }
+}
