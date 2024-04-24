@@ -23,8 +23,8 @@ public:
     Matrix operator*(double scalar) const;
     Matrix operator+(const Matrix& other) const;
     void print() const;
-    static void quantize(const Matrix& mat, Matrix<int8_t>& quantized_mat, Matrix<float>& scale);
-    static void dequantize(const Matrix<int32_t>& quantized_mat, Matrix<float>& dequantized_mat, Matrix<float>& scale);
+    void quantize(const Matrix& mat, Matrix<int8_t>& quantized_mat, Matrix<float>& scale);
+    void dequantize(const Matrix<int32_t>& quantized_mat, Matrix<float>& dequantized_mat, Matrix<float>& scale);
     Matrix transpose() const;
 };
 
