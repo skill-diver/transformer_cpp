@@ -2,6 +2,7 @@
 #define MATRIX_H
 
 #include <vector>
+#include <cinttypes>  // For int8_t and int32_t
 
 class Matrix {
 private:
@@ -22,6 +23,8 @@ public:
     Matrix operator*(double scalar) const;
     Matrix operator+(const Matrix& other) const;
     void print() const;
+    static void quantize(const Matrix& mat, Matrix<int8_t>& quantized_mat, Matrix<float>& scale);
+    static void dequantize(const Matrix<int32_t>& quantized_mat, Matrix<float>& dequantized_mat, Matrix<float>& scale);
     Matrix transpose() const;
 };
 
